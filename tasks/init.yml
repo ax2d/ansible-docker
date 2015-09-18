@@ -1,3 +1,4 @@
+- user: name=jenkins group=docker append=yes
 
 - name: Check if /etc/init exists
   stat: path=/etc/init/

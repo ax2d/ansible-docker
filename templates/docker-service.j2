@@ -3,13 +3,12 @@
 [Unit]
 Description=Docker Application Container Engine
 Documentation=https://docs.docker.com
-After=network.target docker.socket
-Requires=docker.socket
+After=network.target
 
 [Service]
 Type=notify
 EnvironmentFile=-/etc/sysconfig/docker
-ExecStart=/usr/bin/docker -d -H fd:// $OPTIONS
+ExecStart=/usr/bin/docker -d $OPTIONS
 MountFlags=slave
 LimitNOFILE=1048576
 LimitNPROC=1048576
