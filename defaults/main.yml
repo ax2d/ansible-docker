@@ -17,5 +17,10 @@ docker_create_group: true
 #
 docker_listen_tcp: False
 docker_listen_port: 4243
+docker_registry_port: 5000
+docker_opts: "{% for node in groups['docker-registry'] %} --insecure-registry {{ node }}:{{ docker_registry_port }}{% endfor %}"
 # docker_opts: '"-H tcp://{{ansible_eth1.ipv4.address}}:{{docker_listen_port}}"'
 ##### ---
+
+
+
