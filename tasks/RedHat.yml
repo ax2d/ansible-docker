@@ -2,5 +2,12 @@
   template: src=docker-repo.j2 dest=/etc/yum.repos.d/docker.repo
  
 - name: Install Docker Engine
-  yum: name=docker-1.6.2-14.el7.centos state=present
+  yum: name={{ item }} state=present
+  with_items:
+    - docker-1.6.2-14.el7.centos
 
+- name: Install pip
+  easy_install: name=pip
+
+- name: Install docker-py
+  pip: name=docker-py state=latest
