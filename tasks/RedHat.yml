@@ -4,7 +4,7 @@
 - name: Install Docker Engine
   yum: name={{ item }} state=present
   with_items:
-    - docker-1.6.2-14.el7.centos
+    - docker-{{ docker_version }}
 
 - name: Install pip
   easy_install: name=pip

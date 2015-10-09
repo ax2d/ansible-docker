@@ -1,6 +1,6 @@
 ---
 docker_playbook_version: "0.1.2"
-
+docker_version: "1.7.1-108.el7.centos.x86_64"
 docker_opts: ''
 docker_create_group: true
 
