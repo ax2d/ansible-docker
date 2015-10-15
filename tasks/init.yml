@@ -16,5 +16,8 @@
   notify: 
     - Restart Docker
 
+- name: Create docker data dir
+  file: path={{ docker_data_dir }} owner=docker group=docker state=directory mode=0755
+
 - name: Make sure docker is running
   service: name=docker state=started enabled=yes
