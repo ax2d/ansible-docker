@@ -1,3 +1,16 @@
+---
+- name: Ensure data dir is ext4
+  copy: src=ovl.py dest=/usr/lib/yum-plugins/ovl.py mode=0644 owner=root group=root
+  when: docker_use_overlayfs
+
+- name: Install yum overlay plugin
+  copy: src=ovl.py dest=/usr/lib/yum-plugins/ovl.py mode=0644 owner=root group=root
+  when: docker_use_overlayfs
+
+- name: Enable yum overlay plugin
+  copy: src=ovl.conf dest=/etc/yum/pluginconf.d/ovl.conf mode=0644 owner=root group=root
+  when: docker_use_overlayfs
+
 - name: Install Docker Repository
   template: src=docker-repo.j2 dest=/etc/yum.repos.d/docker.repo
  
