@@ -29,3 +29,5 @@ docker_opts: "{% for node in groups['docker-registry'] %} --insecure-registry {{
 docker_storage_opts: ""
 docker_use_overlayfs: docker_storage_opts.find("overlay") != -1
 
+# CAUTION! SETTING THIS TO true WILL REFORMAT THE docker_data_device
+docker_init_storage: false

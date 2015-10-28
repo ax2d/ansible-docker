@@ -1,0 +1,15 @@
+---
+- name: Unmount data dir
+  mount: name={{ docker_data_dir }} src={{ docker_data_device }} fstype=ext4 state=unmounted
+
+- name: Ensure data dir is ext4
+  filesystem: fstype=ext4 dev=/dev/sdg1
+
+- name: Mount data dir
+  mount: name={{ docker_data_dir }} src={{ docker_data_device }} fstype=ext4 state=mounted
+
+- name: Install yum overlay plugin
+  copy: src=ovl.py dest=/usr/lib/yum-plugins/ovl.py mode=0644 owner=root group=root
+
+- name: Enable yum overlay plugin
+  copy: src=ovl.conf dest=/etc/yum/pluginconf.d/ovl.conf mode=0644 owner=root group=root

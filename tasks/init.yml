@@ -16,5 +16,8 @@
     - Reload Systemd
     - Restart Docker
 
+- name: Reload systemd
+  shell: systemctl daemon-reload
+
 - name: Make sure Docker is started
   service: name=docker state=restarted enabled=yes

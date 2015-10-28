@@ -1,0 +1,19 @@
+---
+- name: Install lvm2
+  yum: name=lvm2 state=latest
+
+- name: Start lvm2-lvmetad
+  service: name=lvm2-lvmetad state=started enabled=yes
+
+# As of ansible 1.9.1, the lvm modules do not work correctly hence the shell commands
+- name: Format partition volume
+  shell: umount {{ docker_data_device }} && pvcreate -y {{ docker_data_device }}
+  ignore_errors: true # skip if already initiated
+
+- name: Create volume group
+  shell: vgcreate {{ docker_vg_name }} {{ docker_data_device }}
+  ignore_errors: true # skip if already initiated
+
+- name: Create logical volume
+  shell: lvcreate -l 96%VG --type thin-pool --thinpool {{ docker_lv_name }} --poolmetadatasize 16G {{ docker_vg_name }}
+  ignore_errors: true # skip if already initiated
