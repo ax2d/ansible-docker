@@ -20,4 +20,4 @@
   shell: systemctl daemon-reload
 
 - name: Make sure Docker is started
-  service: name=docker state=restarted enabled=yes
+  service: name=docker.service state=restarted enabled=yes
