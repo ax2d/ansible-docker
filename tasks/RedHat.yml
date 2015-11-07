@@ -1,4 +1,8 @@
 ---
+- name: Make sure Docker is started
+  service: name=docker.service state=stopped
+  when: docker_init_storage
+
 - include: lvmthinpool.yml
   when: docker_storage_opts.find("thinpooldev") != -1 and docker_init_storage
 
