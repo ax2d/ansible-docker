@@ -1,7 +1,5 @@
 # {{ansible_managed}}
 
 GOMAXPROCS=$((`nproc` / 2))
-OPTIONS={{docker_opts}} {{docker_storage_opts}}
 
-# CentOS 6, RHEL 6
-other_args={{docker_opts}} {{docker_storage_opts}}
+OPTIONS={{docker_opts}} {{docker_storage_opts}}

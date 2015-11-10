@@ -5,6 +5,9 @@
 - name: Start lvm2-lvmetad
   service: name=lvm2-lvmetad state=started enabled=yes
 
+- name: Remove default data dir
+  file: path=/var/lib/docker state=absent
+
 # As of ansible 1.9.1, the lvm modules do not work correctly hence the shell commands
 - name: Format partition volume
   shell: umount {{ docker_data_device }} && pvcreate -y {{ docker_data_device }}
