@@ -12,17 +12,14 @@
 - name: Docker systemd file
   template: src=docker-service.j2 dest=/lib/systemd/system/docker.service backup=yes
   when: systemd_check.stat.exists == true
-  notify:
-    - Reload Systemd
-    - Restart Docker
-
-- name: Reload systemd
-  shell: systemctl daemon-reload
 
 - name: Install old docker image and container purge cronjob
   cron: name="docker_purge" weekday="6" minute=0 hour=6
         user="docker" job="docker ps -a |grep 'weeks ago'|awk '{print $1}'|xargs --no-run-if-empty docker rm -f; docker images |grep 'weeks ago'|awk '{print $3}'|xargs --no-run-if-empty docker rmi -f"
         cron_file=ansible_docker_purge
+
+- name: Reload systemd
+  shell: systemctl daemon-reload
 
 - name: Make sure Docker is started
   service: name=docker.service state=restarted enabled=yes
